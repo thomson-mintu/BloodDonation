@@ -4,3 +4,10 @@
 .output{
     margin: 20px;
 }
+.carousel-item img{
+    max-height: 90vh;
+    object-fit: cover;
+}
+.slideshow{
+    max-height: 80vh;
+}

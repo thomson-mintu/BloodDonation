@@ -1,3 +1,4 @@
+
 <?php
 ob_start();
 session_start();
@@ -30,9 +31,9 @@ require "DB_conn.php";
     </a>
 
     <ul class="nav nav-pills py-3">
-      <li class="nav-item"><a href="./index.php" class="nav-link active " aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="./index.php" class="nav-link " aria-current="page">Home</a></li>
 
-      <?php 
+            <?php 
             if(isset($_SESSION['username'])){
                 echo '<li class="nav-item"><a href="./find.php" class="nav-link" aria-current="page">Find Donor</a></li>';
                 echo '<li class="nav-item"><a href="./change.php" class="nav-link " aria-current="page">Edit Details</a></li>';
@@ -40,32 +41,42 @@ require "DB_conn.php";
             }
             else{
                 echo '<li class="nav-item"><a href="./AddUser.php" class="nav-link" aria-current="page">Register</a></li>';
-                echo '<li class="nav-item"><a href="./login.php" class="nav-link " aria-current="page">Login</a></li>';
+                echo '<li class="nav-item"><a href="./login.php" class="nav-link active " aria-current="page">Login</a></li>';
             }
             ?>
-    </ul>
-  </header>
-  <div id="carouselExampleControls" class="carousel slide slideshow mt-0" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="./images/1.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="./images/2.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="./images/3.jpg" class="d-block w-100" alt="...">
-      </div>
+        </ul>
+    </header>
+    <div class="col-lg-4 mx-auto">
+        <form action="./login.php" method="post">
+            <label for="username">Username</label>
+            <input type="text" class="form-control mb-3" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" class="form-control mb-3" id="password" name="password" required>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
 </body>
 
 </html>
+
+<?php
+if(isset($_POST['username']) && isset($_POST['password'])){
+    $username=$_POST['username'];
+    $password=md5($_POST['password']);
+    $sql = "SELECT username,name,bgroup,place,phone,email from users where username ='".$username."' and password = '".$password."'";
+    $query_run = mysqli_query($con,$sql);
+    if(mysqli_num_rows($query_run)==1){
+        $row = $query_run->fetch_assoc();
+    		session_regenerate_id();
+    		$_SESSION['username'] = $row['username'];
+           echo "<script>alert('Login Successful');</script>";
+           header("Location: ./find.php");
+die();
+
+    }
+    else{
+        echo "<script>alert('Invalid username or password!!!');</script>";
+    }
+}
+
+    ?>

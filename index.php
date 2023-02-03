@@ -45,7 +45,7 @@ require "DB_conn.php";
             ?>
     </ul>
   </header>
-  <div id="carouselExampleControls" class="carousel slide slideshow mt-0" data-bs-ride="carousel">
+  <!-- <div id="carouselExampleControls" class="carousel slide slideshow mt-0" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="./images/1.jpg" class="d-block w-100" alt="...">
@@ -65,6 +65,16 @@ require "DB_conn.php";
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
+  </div> -->
+  <div class="index">
+    <div class="jumbotron col-lg-8 mx-auto vertical-align">
+      <h1>Did you know?</h1>
+      <p class="lead">Just 1 donation can save up to 3 lives</p>
+      <hr class="my-4">
+      <p class="text">Each unit of blood donated is separated into four major components - platelets, plasma, red blood
+        cells and
+        white blood cells, which can be used to save at least three lives.</p>
+    </div>
   </div>
 </body>
 

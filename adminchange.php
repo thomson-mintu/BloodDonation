@@ -4,7 +4,8 @@ session_start();
 require "DB_conn.php";
 $row = "";
 if(isset($_SESSION['username'])){
-    $sql1 = "SELECT username,name,age,bgroup,place,phone,email,placeid from users where username ='".$_SESSION['username']."'";
+    $_SESSION['changeusername'] = $_POST['user'];
+    $sql1 = "SELECT username,name,age,bgroup,place,phone,email,placeid from users where username ='".$_POST['user']."'";
     $query_run1 = mysqli_query($con,$sql1);
     if(mysqli_num_rows($query_run1)==1){
         $row = $query_run1->fetch_assoc();
@@ -13,18 +14,19 @@ if(isset($_SESSION['username'])){
 else{
     header("Location: ./index.php");
 }
-if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['place'])){
-        $name = mysqli_real_escape_string($con,$_POST['name']);
+if(isset($_POST['username']) &&isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['place'])){
+       $username =  mysqli_real_escape_string($con,$_POST['username']);
+    $name = mysqli_real_escape_string($con,$_POST['name']);
         $age = mysqli_real_escape_string($con,$_POST['age']);
         $bgroup = mysqli_real_escape_string($con,$_POST['bloodgroup']);
         $phone = mysqli_real_escape_string($con,$_POST['phone']);
         $email = mysqli_real_escape_string($con,$_POST['email']);
         $place = mysqli_real_escape_string($con,$_POST['place']);
         $placeid = mysqli_real_escape_string($con,$_POST['placeid']);
-        $sql2 = "update users set name ='".$name."' ,age ='".$age."' ,bgroup='".$bgroup."',place ='".$place."' ,phone ='".$phone."' ,email ='".$email."' ,placeid = '".$placeid."' where username ='".$_SESSION['username']."'";
+        $sql2 = "update users set name ='".$name."' ,age ='".$age."' ,bgroup='".$bgroup."',place ='".$place."' ,phone ='".$phone."' ,email ='".$email."' ,placeid = '".$placeid."' where username ='".$username."'";
         $query_run2 = mysqli_query($con,$sql2);
         if($query_run2){
-            header("Location: ./change.php");
+            header("Location: ./adminchange.php");
         }
         else{
             echo "<script>alret('Failed to update')</script>";
@@ -76,42 +78,8 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
             ?>
         </ul>
     </header>
-    <div class="register">
-    <div class="col-lg-4 mx-auto vertical-align">
-        <form action="change.php" method="post">
-            <label for="username">Username</label>
-            <input type="text" class="form-control mb-3" id="username" name="username"<?php echo "value ='".$row['username']."'" ?>required disabled>
-            <label for="name">Name</label>
-            <input type="text" class="form-control mb-3" id="name" name="name" <?php echo "value ='".$row['name']."'" ?> required>
-            <label for="age">Age</label>
-            <input type="text" class="form-control mb-3" id="age" name="age" <?php echo "value ='".$row['age']."'" ?> required>
-            <label for="group">Blood Group</label>
-            <select name="bloodgroup" id="group" class="form-select mb-3"  <?php echo "value ='".$row['bgroup']."'" ?> required>
-                <?php 
-                $groupoptions = array("A+","A-","B+","B-","O+","O-","AB+","AB-");
-                for( $i=0;$i<count($groupoptions);$i++){
-                    echo "<option value=".$groupoptions[$i]." ".($groupoptions[$i] == $row['bgroup']? "selected":"" ).">".$groupoptions[$i]."</option>";
-                }
-                ?>
-            </select>
-            <label for="place">District</label>
-            <select name="place" id="place" class="form-select mb-3" <?php echo "value ='".$row['place']."'" ?> required>
-            <?php 
-            $placeOptions = array("Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad");
-            for( $i=0;$i<count($placeOptions);$i++){
-                echo "<option value=".$placeOptions[$i]." ".($placeOptions[$i] == $row['place']? "selected":"" ).">".$placeOptions[$i]."</option>";
-            }
-            ?>                
-            </select>
-            <label for="phone">Phone</label>
-            <input type="text" maxlength="10" class="form-control mb-3" id="phone" name="phone" <?php echo "value ='".$row['phone']."'" ?> required>
-            <label for="email">Email</label>
-            <input type="email" class="form-control mb-3" id="email" name="email" <?php echo "value ='".$row['email']."'" ?> required>
-            <input type="text" hidden name = "placeid" <?php echo "value ='".$row['placeid']."'" ?> id="placeid">
-            <button type="submit" class="btn btn-lg btn-primary mx-auto form-control text-center">Save</button>
-        </form>
-        </div>
-    </div>
+    
+
     <script src ="./js/index.js"></script>
 </body>
 

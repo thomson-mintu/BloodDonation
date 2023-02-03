@@ -2,6 +2,14 @@
 ob_start();
 session_start();
 require "DB_conn.php";
+if(isset($_SESSION['username']) && isset($_SESSION['isadmin']) && $_SESSION['isadmin']){
+    $sql = "SELECT username,name from users";
+    $sql1 = "SELECT username,name,age,bgroup,place,phone,email,isadmin,placeid from users";
+    $query_run = mysqli_query($con,$sql);
+}
+else{
+    header("Location: ./index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +26,7 @@ require "DB_conn.php";
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
   <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon">
   <title>Blood Donation Management</title>
 </head>
@@ -30,13 +39,13 @@ require "DB_conn.php";
     </a>
 
     <ul class="nav nav-pills py-3">
-      <li class="nav-item"><a href="./index.php" class="nav-link active " aria-current="page">Home</a></li>
+      <li class="nav-item"><a href="./index.php" class="nav-link " aria-current="page">Home</a></li>
 
       <?php 
             if(isset($_SESSION['username'])){
                 echo '<li class="nav-item"><a href="./find.php" class="nav-link" aria-current="page">Find Donor</a></li>';
                 if(isset($_SESSION['isadmin']) && $_SESSION['isadmin']) {
-                  echo '<li class="nav-item"><a href="./admin.php" class="nav-link " aria-current="page">Admin</a></li>';
+                  echo '<li class="nav-item"><a href="./admin.php" class="nav-link active" aria-current="page">Admin</a></li>';
                 }
                 echo '<li class="nav-item"><a href="./change.php" class="nav-link " aria-current="page">Profile</a></li>';
                 echo '<li class="nav-item"><a href="./logout.php" class="nav-link " aria-current="page">Logout</a></li>';
@@ -48,16 +57,21 @@ require "DB_conn.php";
             ?>
     </ul>
   </header>
-  <div class="index">
-    <div class="jumbotron col-lg-8 mx-auto vertical-align">
-      <h1>Did you know?</h1>
-      <p class="lead">Just 1 donation can save up to 3 lives</p>
-      <hr class="my-4">
-      <p class="text">Each unit of blood donated is separated into four major components - platelets, plasma, red blood
-        cells and
-        white blood cells, which can be used to save at least three lives.</p>
-    </div>
-  </div>
+ <div class="col-lg-2 mx-auto">
+  <form action="adminchange.php" method="post">
+    <?php
+    echo "<select name='user' id='user' class='form-select mb-3'  required>";
+    while($row = $query_run->fetch_assoc()){
+      echo "<option value=".$row['username'].">".$row['name']."</option>";
+
+          }
+          echo "</select>";      
+          
+          ?>
+          <button type="submit" class="btn btn-primary">Change</button>
+      </form>
+ </div>
+  <script src ="./js/index.js"></script>
 </body>
 
 </html>

@@ -57,7 +57,10 @@ if($query_run){
             <?php 
             if(isset($_SESSION['username'])){
                 echo '<li class="nav-item"><a href="./find.php" class="nav-link" aria-current="page">Find Donor</a></li>';
-                echo '<li class="nav-item"><a href="./change.php" class="nav-link " aria-current="page">Edit Details</a></li>';
+                if(isset($_SESSION['isadmin']) && $_SESSION['isadmin']) {
+                  echo '<li class="nav-item"><a href="./admin.php" class="nav-link " aria-current="page">Admin</a></li>';
+                }
+                echo '<li class="nav-item"><a href="./change.php" class="nav-link " aria-current="page">Profile</a></li>';
                 echo '<li class="nav-item"><a href="./logout.php" class="nav-link " aria-current="page">Logout</a></li>';
             }
             else{

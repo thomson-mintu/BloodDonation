@@ -66,15 +66,16 @@ require "DB_conn.php";
 if(isset($_POST['username']) && isset($_POST['password'])){
     $username=mysqli_real_escape_string($con,$_POST['username']);
     $password=mysqli_real_escape_string($con,md5($_POST['password']));
-    $sql = "SELECT username,name,bgroup,place,phone,email from users where username ='".$username."' and password = '".$password."'";
+    $sql = "SELECT username,name,bgroup,place,phone,email,isadmin from users where username ='".$username."' and password = '".$password."'";
     $query_run = mysqli_query($con,$sql);
     if(mysqli_num_rows($query_run)==1){
         $row = $query_run->fetch_assoc();
+        echo "<script>alert('Login Successful'".$row['isadmin'].");</script>";
     		session_regenerate_id();
     		$_SESSION['username'] = $row['username'];
-           echo "<script>alert('Login Successful');</script>";
-           header("Location: ./find.php");
-die();
+        $_SESSION['changeusername'] = $row['username'];
+        $_SESSION['isadmin'] = $row['isadmin'];
+        header("Location: ./find.php");
 
     }
     else{

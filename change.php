@@ -14,13 +14,13 @@ else{
     header("Location: ./index.php");
 }
 if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['place'])){
-        $name = $_POST['name'];
-        $age = $_POST['age'];
-        $bgroup = $_POST['bloodgroup'];
-        $phone = $_POST['phone'];
-        $email = $_POST['email'];
-        $place = $_POST['place'];
-        $placeid = $_POST['placeid'];
+        $name = mysqli_real_escape_string($con,$_POST['name']);
+        $age = mysqli_real_escape_string($con,$_POST['age']);
+        $bgroup = mysqli_real_escape_string($con,$_POST['bloodgroup']);
+        $phone = mysqli_real_escape_string($con,$_POST['phone']);
+        $email = mysqli_real_escape_string($con,$_POST['email']);
+        $place = mysqli_real_escape_string($con,$_POST['place']);
+        $placeid = mysqli_real_escape_string($con,$_POST['placeid']);
         $sql2 = "update users set name ='".$name."' ,age ='".$age."' ,bgroup='".$bgroup."',place ='".$place."' ,phone ='".$phone."' ,email ='".$email."' ,placeid = '".$placeid."' where username ='".$_SESSION['username']."'";
         $query_run2 = mysqli_query($con,$sql2);
         if($query_run2){

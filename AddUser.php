@@ -3,15 +3,15 @@ ob_start();
 session_start();
 require "DB_conn.php";
 if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) && isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['place'])){
-$user = $_POST['username'];
-$pw = md5($_POST['password']);
-$name = $_POST['name'];
-$age = $_POST['age'];
-$bgroup = $_POST['bloodgroup'];
-$phone = $_POST['phone'];
-$email = $_POST['email'];
-$place = $_POST['place'];
-$placeid = $_POST['placeid'];
+$user = mysqli_real_escape_string($con,$_POST['username']);
+$pw = mysqli_real_escape_string($con,md5($_POST['password']));
+$name = mysqli_real_escape_string($con,$_POST['name']);
+$age = mysqli_real_escape_string($con,$_POST['age']);
+$bgroup = mysqli_real_escape_string($con,$_POST['bloodgroup']);
+$phone = mysqli_real_escape_string($con,$_POST['phone']);
+$email = mysqli_real_escape_string($con,$_POST['email']);
+$place = mysqli_real_escape_string($con,$_POST['place']);
+$placeid = mysqli_real_escape_string($con,$_POST['placeid']);
 $sql = "INSERT INTO users (username, password,name,age,bgroup,place,phone,email,placeid) VALUES ('".$user."', '".$pw."', '".$name."', '".$age."', '".$bgroup."','".$place."', '".$phone."', '".$email."', '".$placeid."')";
 $query_run = mysqli_query($con,$sql);
 if($query_run){

@@ -96,8 +96,8 @@ else{
             <?php
 
 if(isset($_POST['bloodgroup']) && isset($_POST['place'])){
-    $bgroup=$_POST['bloodgroup'];
-    $place=$_POST['place'];
+    $bgroup=mysqli_real_escape_string($con,$_POST['bloodgroup']);
+    $place=mysqli_real_escape_string($con,$_POST['place']);
     $sql = "SELECT name,bgroup,place,phone,email from users where bgroup ='".$bgroup."' and place = '".$place."'";
     $query_run = mysqli_query($con,$sql);
     if(mysqli_num_rows($query_run)==0){

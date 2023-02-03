@@ -64,8 +64,8 @@ require "DB_conn.php";
 
 <?php
 if(isset($_POST['username']) && isset($_POST['password'])){
-    $username=$_POST['username'];
-    $password=md5($_POST['password']);
+    $username=mysqli_real_escape_string($con,$_POST['username']);
+    $password=mysqli_real_escape_string($con,md5($_POST['password']));
     $sql = "SELECT username,name,bgroup,place,phone,email from users where username ='".$username."' and password = '".$password."'";
     $query_run = mysqli_query($con,$sql);
     if(mysqli_num_rows($query_run)==1){

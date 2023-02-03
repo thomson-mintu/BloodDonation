@@ -11,7 +11,8 @@ $bgroup = $_POST['bloodgroup'];
 $phone = $_POST['phone'];
 $email = $_POST['email'];
 $place = $_POST['place'];
-$sql = "INSERT INTO users (username, password,name,age,bgroup,place,phone,email) VALUES ('".$user."', '".$pw."', '".$name."', '".$age."', '".$bgroup."','".$place."', '".$phone."', '".$email."')";
+$placeid = $_POST['placeid'];
+$sql = "INSERT INTO users (username, password,name,age,bgroup,place,phone,email,placeid) VALUES ('".$user."', '".$pw."', '".$name."', '".$age."', '".$bgroup."','".$place."', '".$phone."', '".$email."', '".$placeid."')";
 $query_run = mysqli_query($con,$sql);
 if($query_run){
         session_regenerate_id();
@@ -37,6 +38,7 @@ if($query_run){
     crossorigin="anonymous"></script>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon">
   <title>Blood Donation Management</title>
@@ -65,7 +67,8 @@ if($query_run){
             ?>
         </ul>
     </header>
-    <div class="col-lg-4 mx-auto">
+    <div class="register">
+    <div class="col-lg-4 mx-auto my-3 vertical-align">
         <form action="./AddUser.php" method="post">
             <label for="username">Username</label>
             <input type="text" class="form-control mb-3" id="username" name="username" required>
@@ -99,10 +102,13 @@ if($query_run){
             <input type="text" maxlength="10" class="form-control mb-3" id="phone" name="phone" required>
             <label for="email">Email</label>
             <input type="email" class="form-control mb-3" id="email" name="email" required>
+            <input type="text" hidden name = "placeid" value="-1" id="placeid">
 
-            <button type="submit" class="btn btn-lg btn-primary mx-auto form-control text-center">Save</button>
+            <button type="submit" class="btn btn-lg btn-primary mx-auto form-control text-center">Register</button>
         </form>
     </div>
+    </div>
+    <script src ="./js/index.js"></script>
 </body>
 
 </html>

@@ -20,7 +20,8 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $place = $_POST['place'];
-        $sql2 = "update users set name ='".$name."' ,age ='".$age."' ,bgroup='".$bgroup."',place ='".$place."' ,phone ='".$phone."' ,email ='".$email."' where username ='".$_SESSION['username']."'";
+        $placeid = $_POST['placeid'];
+        $sql2 = "update users set name ='".$name."' ,age ='".$age."' ,bgroup='".$bgroup."',place ='".$place."' ,phone ='".$phone."' ,email ='".$email."' ,placeid = '".$placeid."' where username ='".$_SESSION['username']."'";
         $query_run2 = mysqli_query($con,$sql2);
         if($query_run2){
             header("Location: ./change.php");
@@ -44,6 +45,7 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
     crossorigin="anonymous"></script>
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="./images/icon.png" type="image/x-icon">
   <title>Blood Donation Management</title>
@@ -71,7 +73,8 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
             ?>
         </ul>
     </header>
-    <div class="col-lg-4 mx-auto">
+    <div class="register">
+    <div class="col-lg-4 mx-auto vertical-align">
         <form action="change.php" method="post">
             <label for="username">Username</label>
             <input type="text" class="form-control mb-3" id="username" name="username"<?php echo "value ='".$row['username']."'" ?>required disabled>
@@ -101,10 +104,12 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
             <input type="text" maxlength="10" class="form-control mb-3" id="phone" name="phone" <?php echo "value ='".$row['phone']."'" ?> required>
             <label for="email">Email</label>
             <input type="email" class="form-control mb-3" id="email" name="email" <?php echo "value ='".$row['email']."'" ?> required>
-
+            <input type="text" hidden name = "placeid" value="-1" id="placeid">
             <button type="submit" class="btn btn-lg btn-primary mx-auto form-control text-center">Save</button>
         </form>
+        </div>
     </div>
+    <script src ="./js/index.js"></script>
 </body>
 
 </html>

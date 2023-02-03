@@ -55,6 +55,8 @@ else{
             ?>
         </ul>
     </header>
+    <div class = "find">
+    <div class = "vertical-align">
     <?php echo '<div class="text-center"><h1>Hai '.$row["name"].'</h1></div>' ?>
     <form action="find.php" method="post">
         <div class="row">
@@ -86,10 +88,11 @@ else{
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </div>
+        
     </form>
 
     <div class="row output">
-        <div class="col-lg-8 mx-auto">
+        <div class=" mx-auto">
             <?php
 
 if(isset($_POST['bloodgroup']) && isset($_POST['place'])){
@@ -101,7 +104,7 @@ if(isset($_POST['bloodgroup']) && isset($_POST['place'])){
         echo "<h2 class='text-center'>No results found</h2>";
     }
     else{
-    echo "<table style=' width: 100%;' class='table table-success table-striped'>";
+    echo "<table style=' width: 100%;' class='table table-striped'>";
     echo "<tr>";
     echo "<th style='text-align:center;'>Name</th>";
     echo "<th style='text-align:center;'>Blood Group</th>";
@@ -122,6 +125,8 @@ if(isset($_POST['bloodgroup']) && isset($_POST['place'])){
 }
 }
 ?>
+</div>
+        </div>
         </div>
     </div>
     </div>

@@ -11,3 +11,46 @@
 .slideshow{
     max-height: 80vh;
 }
+
+.register{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background-image: url('./images/3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.login{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background-image: url('./images/2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.find{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background-image: url('./images/4.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.vertical-align{
+    margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.4);
+  
+  padding: 30px;
+}
+
+label,a{
+    font-weight: bolder !important;
+}

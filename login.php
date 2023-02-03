@@ -46,14 +46,17 @@ require "DB_conn.php";
             ?>
         </ul>
     </header>
-    <div class="col-lg-4 mx-auto">
+    <div class="login">
+    <div class="col-lg-4 mx-auto vertical-align">
         <form action="./login.php" method="post">
             <label for="username">Username</label>
             <input type="text" class="form-control mb-3" id="username" name="username" required>
             <label for="password">Password</label>
             <input type="password" class="form-control mb-3" id="password" name="password" required>
             <button type="submit" class="btn btn-primary">Login</button>
+            <a href ="adduser.php" class="nav-link">New User? Register here<a>
         </form>
+        </div>
     </div>
 </body>
 

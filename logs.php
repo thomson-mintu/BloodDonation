@@ -68,9 +68,11 @@ else{
     echo "</tr>";
     echo "</thead>";
     echo "<tbody>";
+    $i=0;
     while($row = $query_run->fetch_assoc()){
+      $i=$i+1;
         echo "<tr>";
-        echo "<td style='text-align:center;'>".$row['id']."</td>";
+        echo "<td style='text-align:center;'>".$i."</td>";
         echo "<td style='text-align:center;'>".$row['Name']."'s data was ".$row['action']." in user table</td>";
         echo "<td style='text-align:center;'>".$row['cdate']."</td>";
         echo "</tr>";

@@ -68,6 +68,15 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.logs{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background-image: url('./images/7.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 label,a{
     font-weight: bolder !important;
@@ -92,4 +101,9 @@ label,a{
 
 .admin-width{
     width:-webkit-fill-available;
+}
+
+.table-maxheight{
+    max-height: 600px;
+    overflow-y: auto;
 }

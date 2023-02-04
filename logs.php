@@ -1,7 +1,15 @@
+
 <?php
 ob_start();
 session_start();
 require "DB_conn.php";
+if(isset($_SESSION['username'])  && isset($_SESSION['isadmin']) && $_SESSION['isadmin']){
+    $sql = "SELECT * from logs;";
+    $query_run = mysqli_query($con,$sql);
+}
+else{
+    header("Location: ./index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,35 +38,46 @@ require "DB_conn.php";
     </a>
 
     <ul class="nav nav-pills">
-      <li class="nav-item"><a href="./index.php" class="nav-link active " aria-current="page">Home</a></li>
-
-      <?php 
+            <li class="nav-item"><a href="./index.php" class="nav-link" aria-current="page">Home</a></li>
+            <?php 
             if(isset($_SESSION['username'])){
                 echo '<li class="nav-item"><a href="./find.php" class="nav-link" aria-current="page">Find Donor</a></li>';
                 if(isset($_SESSION['isadmin']) && $_SESSION['isadmin']) {
-                  echo '<li class="nav-item"><a href="./admin.php" class="nav-link " aria-current="page">Admin</a></li>';
-                  echo '<li class="nav-item"><a href="./logs.php" class="nav-link" aria-current="page">Logs</a></li>';
-                }
-                echo '<li class="nav-item"><a href="./change.php" class="nav-link " aria-current="page">Profile</a></li>';
+                    echo '<li class="nav-item"><a href="./admin.php" class="nav-link " aria-current="page">Admin</a></li>';
+                    echo '<li class="nav-item"><a href="./logs.php" class="nav-link active" aria-current="page">Logs</a></li>';
+                  }
+                  echo '<li class="nav-item"><a href="./change.php" class="nav-link " aria-current="page">Profile</a></li>';
                 echo '<li class="nav-item"><a href="./logout.php" class="nav-link " aria-current="page">Logout</a></li>';
             }
             else{
-                echo '<li class="nav-item"><a href="./AddUser.php" class="nav-link" aria-current="page">Register</a></li>';
+                echo '<li class="nav-item"><a href="./AddUser.php" class="nav-link " aria-current="page">Register</a></li>';
                 echo '<li class="nav-item"><a href="./login.php" class="nav-link " aria-current="page">Login</a></li>';
             }
             ?>
-    </ul>
-  </header>
-  <div class="index">
-    <div class="jumbotron col-lg-8 mx-auto vertical-align">
-      <h1>Did you know?</h1>
-      <p class="lead">Just 1 donation can save up to 3 lives</p>
-      <hr class="my-4">
-      <p class="text">Each unit of blood donated is separated into four major components - platelets, plasma, red blood
-        cells and
-        white blood cells, which can be used to save at least three lives.</p>
+        </ul>
+    </header>
+    <div class="logs">
+    <div class="col-lg-6 mx-auto vertical-align table-maxheight">
+    <?php
+    echo "<table style=' width: 100%;' class='table'>";
+    echo "<thead class='table-dark'>";
+    echo "<tr>";
+    echo "<th style='text-align:center;'>#</th>";
+    echo "<th style='text-align:center;'>Change</th>";
+    echo "<th style='text-align:center;'>Changed On</th>";
+    echo "</tr>";
+    echo "</thead>";
+    echo "<tbody>";
+    while($row = $query_run->fetch_assoc()){
+        echo "<tr>";
+        echo "<td style='text-align:center;'>".$row['id']."</td>";
+        echo "<td style='text-align:center;'>".$row['Name']."'s data was ".$row['action']." in user table</td>";
+        echo "<td style='text-align:center;'>".$row['cdate']."</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    ?>
     </div>
-  </div>
-</body>
-
-</html>
+    </div>
+        </body>
+        </html>

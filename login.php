@@ -3,6 +3,9 @@
 ob_start();
 session_start();
 require "DB_conn.php";
+if(isset($_SESSION['username'])){
+  header("Location: ./find.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

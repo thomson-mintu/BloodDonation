@@ -29,7 +29,7 @@ require "DB_conn.php";
       <span class="fs-4">Blood Donation Management</span>
     </a>
 
-    <ul class="nav nav-pills py-3">
+    <ul class="nav nav-pills">
       <li class="nav-item"><a href="./index.php" class="nav-link active " aria-current="page">Home</a></li>
 
       <?php 

@@ -15,11 +15,15 @@ $placeid = mysqli_real_escape_string($con,$_POST['placeid']);
 $sql = "INSERT INTO users (username, password,name,age,bgroup,place,phone,email,placeid) VALUES ('".$user."', '".$pw."', '".$name."', '".$age."', '".$bgroup."','".$place."', '".$phone."', '".$email."', '".$placeid."')";
 $query_run = mysqli_query($con,$sql);
 if($query_run){
+  if($_SESSION['isadmin']){
+    header("Location: ./admin.php");
+  }else{
         session_regenerate_id();
     	$_SESSION['username'] = $_POST['username'];
         echo "<script>alert('Login Successful');</script>";
         header("Location: ./find.php");
     echo "<script>alert('Success')</script>";
+}
 }
 
 }
@@ -51,7 +55,7 @@ if($query_run){
       <span class="fs-4">Blood Donation Management</span>
     </a>
 
-    <ul class="nav nav-pills py-3">
+    <ul class="nav nav-pills">
             <li class="nav-item"><a href="./index.php" class="nav-link " aria-current="page">Home</a></li>
                      
             <?php 
@@ -74,15 +78,15 @@ if($query_run){
     <div class="col-lg-4 mx-auto my-3 vertical-align">
         <form action="./AddUser.php" method="post">
             <label for="username">Username</label>
-            <input type="text" class="form-control mb-3" id="username" name="username" required>
+            <input type="text" class="form-control mb-1" id="username" name="username" required>
             <label for="password">Password</label>
-            <input type="password" class="form-control mb-3" id="password" name="password" required>
+            <input type="password" class="form-control mb-1" id="password" name="password" required>
             <label for="name">Name</label>
-            <input type="text" class="form-control mb-3" id="name" name="name" required>
+            <input type="text" class="form-control mb-1" id="name" name="name" required>
             <label for="age">Age</label>
-            <input type="text" class="form-control mb-3" id="age" name="age" required>
+            <input type="text" class="form-control mb-1" id="age" name="age" required>
             <label for="group">Blood Group</label>
-            <select name="bloodgroup" id="group" class="form-select mb-3"  required>
+            <select name="bloodgroup" id="group" class="form-select mb-1"  required>
                 <option value="">Select Blood Group</option>
                 <?php 
                 $groupoptions = array("A+","A-","B+","B-","O+","O-","AB+","AB-");
@@ -92,7 +96,7 @@ if($query_run){
                 ?>
             </select>
             <label for="place">District</label>
-            <select name="place" id="place" class="form-select mb-3" required>
+            <select name="place" id="place" class="form-select mb-1" required>
                 <option value="">Select District</option>
                 <?php 
             $placeOptions = array("Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad");
@@ -102,9 +106,9 @@ if($query_run){
             ?>   
             </select>
             <label for="phone">Phone</label>
-            <input type="text" maxlength="10" class="form-control mb-3" id="phone" name="phone" required>
+            <input type="text" maxlength="10" class="form-control mb-1" id="phone" name="phone" required>
             <label for="email">Email</label>
-            <input type="email" class="form-control mb-3" id="email" name="email" required>
+            <input type="email" class="form-control mb-1" id="email" name="email" required>
             <input type="text" hidden name = "placeid" value="-1" id="placeid">
 
             <button type="submit" class="btn btn-lg btn-primary mx-auto form-control text-center">Register</button>

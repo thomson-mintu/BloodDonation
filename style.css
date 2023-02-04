@@ -1,5 +1,5 @@
 .icon{
-    height: 64px;
+    height: 48px;
 }
 .output{
     margin: 20px;
@@ -42,7 +42,7 @@
 .vertical-align{
     margin: 0;
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -56,6 +56,15 @@
     justify-content: center;
     position: relative;
     background-image: url('./images/5.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.admin{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background-image: url('./images/6.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -73,4 +82,10 @@ label,a{
 }
 .text{
     font-size: 24px;
+}
+.link-button{
+    font-weight: unset !important;
+}
+.my-6{
+    margin-top: 55px;
 }

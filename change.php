@@ -58,7 +58,7 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
       <span class="fs-4">Blood Donation Management</span>
     </a>
 
-    <ul class="nav nav-pills py-3">
+    <ul class="nav nav-pills ">
             <li class="nav-item"><a href="./index.php" class="nav-link " aria-current="page">Home</a></li>
            <?php 
             if(isset($_SESSION['username'])){
@@ -66,7 +66,7 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
                 if(isset($_SESSION['isadmin']) && $_SESSION['isadmin']) {
                     echo '<li class="nav-item"><a href="./admin.php" class="nav-link " aria-current="page">Admin</a></li>';
                   }
-                  echo '<li class="nav-item"><a href="./change.php" class="nav-link " aria-current="page">Profile</a></li>';
+                  echo '<li class="nav-item"><a href="./change.php" class="nav-link active" aria-current="page">Profile</a></li>';
                 echo '<li class="nav-item"><a href="./logout.php" class="nav-link " aria-current="page">Logout</a></li>';
             }
             else{
@@ -80,13 +80,13 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
     <div class="col-lg-4 mx-auto vertical-align">
         <form action="change.php" method="post">
             <label for="username">Username</label>
-            <input type="text" class="form-control mb-3" id="username" name="username"<?php echo "value ='".$row['username']."'" ?>required disabled>
+            <input type="text" class="form-control mb-1" id="username" name="username"<?php echo "value ='".$row['username']."'" ?>required disabled>
             <label for="name">Name</label>
-            <input type="text" class="form-control mb-3" id="name" name="name" <?php echo "value ='".$row['name']."'" ?> required>
+            <input type="text" class="form-control mb-1" id="name" name="name" <?php echo "value ='".$row['name']."'" ?> required>
             <label for="age">Age</label>
-            <input type="text" class="form-control mb-3" id="age" name="age" <?php echo "value ='".$row['age']."'" ?> required>
+            <input type="text" class="form-control mb-1" id="age" name="age" <?php echo "value ='".$row['age']."'" ?> required>
             <label for="group">Blood Group</label>
-            <select name="bloodgroup" id="group" class="form-select mb-3"  <?php echo "value ='".$row['bgroup']."'" ?> required>
+            <select name="bloodgroup" id="group" class="form-select mb-1"  <?php echo "value ='".$row['bgroup']."'" ?> required>
                 <?php 
                 $groupoptions = array("A+","A-","B+","B-","O+","O-","AB+","AB-");
                 for( $i=0;$i<count($groupoptions);$i++){
@@ -95,7 +95,7 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
                 ?>
             </select>
             <label for="place">District</label>
-            <select name="place" id="place" class="form-select mb-3" <?php echo "value ='".$row['place']."'" ?> required>
+            <select name="place" id="place" class="form-select mb-1" <?php echo "value ='".$row['place']."'" ?> required>
             <?php 
             $placeOptions = array("Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad");
             for( $i=0;$i<count($placeOptions);$i++){
@@ -104,9 +104,9 @@ if(isset($_POST['name']) && isset($_POST['age']) && isset($_POST['bloodgroup']) 
             ?>                
             </select>
             <label for="phone">Phone</label>
-            <input type="text" maxlength="10" class="form-control mb-3" id="phone" name="phone" <?php echo "value ='".$row['phone']."'" ?> required>
+            <input type="text" maxlength="10" class="form-control mb-1" id="phone" name="phone" <?php echo "value ='".$row['phone']."'" ?> required>
             <label for="email">Email</label>
-            <input type="email" class="form-control mb-3" id="email" name="email" <?php echo "value ='".$row['email']."'" ?> required>
+            <input type="email" class="form-control mb-1" id="email" name="email" <?php echo "value ='".$row['email']."'" ?> required>
             <input type="text" hidden name = "placeid" <?php echo "value ='".$row['placeid']."'" ?> id="placeid">
             <button type="submit" class="btn btn-lg btn-primary mx-auto form-control text-center">Save</button>
         </form>

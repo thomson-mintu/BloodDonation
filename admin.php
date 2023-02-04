@@ -10,6 +10,11 @@ if(isset($_SESSION['username']) && isset($_SESSION['isadmin']) && $_SESSION['isa
 else{
     header("Location: ./index.php");
 }
+
+if(isset($_POST['user'])){
+  $_SESSION['changeusername'] = $_POST['user'];
+  header('Location: ./adminchange.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +43,7 @@ else{
       <span class="fs-4">Blood Donation Management</span>
     </a>
 
-    <ul class="nav nav-pills py-3">
+    <ul class="nav nav-pills ">
       <li class="nav-item"><a href="./index.php" class="nav-link " aria-current="page">Home</a></li>
 
       <?php 
@@ -57,10 +62,22 @@ else{
             ?>
     </ul>
   </header>
- <div class="col-lg-2 mx-auto">
-  <form action="adminchange.php" method="post">
+  <div class="admin">
+  <div class="row mx-auto vertical-align">
+  <div class="col-lg-3 mx-auto my-4">
+ <h3>Add User</h3>
+ <form action="./adduser.php">
+  <button class = "btn btn-primary my-6 link-button form-control" type="submit">Add</button>
+ </form>
+
+ </div>
+ <div class="col-lg-3 mx-auto my-4">
+ <h3>Edit User</h3>
+  <form action="admin.php" method="post">
     <?php
     echo "<select name='user' id='user' class='form-select mb-3'  required>";
+    echo "<option value= 'Select User' disabled selected>Select User</option>";
+    $query_run = mysqli_query($con,$sql);
     while($row = $query_run->fetch_assoc()){
       echo "<option value=".$row['username'].">".$row['name']."</option>";
 
@@ -68,8 +85,28 @@ else{
           echo "</select>";      
           
           ?>
-          <button type="submit" class="btn btn-primary">Change</button>
+          <button type="submit" class="btn btn-primary form-control">Edit</button>
       </form>
+ </div>
+ <div class="col-lg-3 mx-auto my-4">
+  <h3>Delete User</h3>
+  <form action="deleteuser.php" method="post">
+    <?php
+    echo "<select name='user' id='user' class='form-select mb-3'  required>";
+    echo "<option value= 'Select User' disabled selected>Select User</option>";
+    $query_run = mysqli_query($con,$sql);
+    while($row = $query_run->fetch_assoc()){
+      echo "<option value=".$row['username'].">".$row['name']."</option>";
+
+          }
+          echo "</select>";      
+          
+          ?>
+          <button type="submit" class="btn btn-primary form-control">Delete</button>
+      </form>
+ </div>
+ 
+ </div>
  </div>
   <script src ="./js/index.js"></script>
 </body>

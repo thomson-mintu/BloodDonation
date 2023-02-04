@@ -30,7 +30,7 @@ require "DB_conn.php";
       <span class="fs-4">Blood Donation Management</span>
     </a>
 
-    <ul class="nav nav-pills py-3">
+    <ul class="nav nav-pills ">
             <li class="nav-item"><a href="./index.php" class="nav-link " aria-current="page">Home</a></li>
 
             <?php 
@@ -73,7 +73,6 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         echo "<script>alert('Login Successful'".$row['isadmin'].");</script>";
     		session_regenerate_id();
     		$_SESSION['username'] = $row['username'];
-        $_SESSION['changeusername'] = $row['username'];
         $_SESSION['isadmin'] = $row['isadmin'];
         header("Location: ./find.php");
 

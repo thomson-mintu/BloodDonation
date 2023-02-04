@@ -40,7 +40,7 @@ else{
       <span class="fs-4">Blood Donation Management</span>
     </a>
 
-    <ul class="nav nav-pills py-3">
+    <ul class="nav nav-pills">
             <li class="nav-item"><a href="./index.php" class="nav-link" aria-current="page">Home</a></li>
             <?php 
             if(isset($_SESSION['username'])){

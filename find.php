@@ -59,7 +59,7 @@ else{
         </ul>
     </header>
     <div class = "find">
-    <div class = "vertical-align">
+    <div class = "vertical-align admin-width">
     <?php echo '<div class="text-center"><h1>Hai '.$row["name"].'</h1></div>' ?>
     <form action="find.php" method="post">
         <div class="row">
@@ -101,7 +101,7 @@ else{
 if(isset($_POST['bloodgroup']) && isset($_POST['place'])){
     $bgroup=mysqli_real_escape_string($con,$_POST['bloodgroup']);
     $place=mysqli_real_escape_string($con,$_POST['place']);
-    $sql = "SELECT name,bgroup,place,phone,email from users where bgroup ='".$bgroup."' and place = '".$place."'";
+    $sql = "SELECT username,name,bgroup,place,phone,email from users where bgroup ='".$bgroup."' and place = '".$place."'";
     $query_run = mysqli_query($con,$sql);
     if(mysqli_num_rows($query_run)==0){
         echo "<h2 class='text-center'>No results found</h2>";
@@ -116,6 +116,10 @@ if(isset($_POST['bloodgroup']) && isset($_POST['place'])){
     echo "<th style='text-align:center;'>Email</th>";
     echo "</tr>";
     while($row = $query_run->fetch_assoc()){
+        if($row['username'] === $_SESSION['username']){
+
+        }
+        else{
         echo "<tr>";
         echo "<td style='text-align:center;'>".$row['name']."</td>";
         echo "<td style='text-align:center;'>".$row['bgroup']."</td>";
@@ -123,7 +127,7 @@ if(isset($_POST['bloodgroup']) && isset($_POST['place'])){
         echo "<td style='text-align:center;'>".$row['phone']."</td>";
         echo "<td style='text-align:center;'>".$row['email']."</td>";
         echo "</tr>";
-    }
+    }}
     echo "</table>";
 }
 }

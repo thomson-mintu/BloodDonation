@@ -63,7 +63,7 @@ if(isset($_POST['user'])){
     </ul>
   </header>
   <div class="admin">
-  <div class="row mx-auto vertical-align">
+  <div class="row mx-auto vertical-align admin-width">
   <div class="col-lg-3 mx-auto my-4">
  <h3>Add User</h3>
  <form action="./adduser.php">
@@ -76,7 +76,7 @@ if(isset($_POST['user'])){
   <form action="admin.php" method="post">
     <?php
     echo "<select name='user' id='user' class='form-select mb-3'  required>";
-    echo "<option value= 'Select User' disabled selected>Select User</option>";
+    echo "<option value= '' disabled selected>Select User</option>";
     $query_run = mysqli_query($con,$sql);
     while($row = $query_run->fetch_assoc()){
       echo "<option value=".$row['username'].">".$row['name']."</option>";
@@ -93,7 +93,7 @@ if(isset($_POST['user'])){
   <form action="deleteuser.php" method="post">
     <?php
     echo "<select name='user' id='user' class='form-select mb-3'  required>";
-    echo "<option value= 'Select User' disabled selected>Select User</option>";
+    echo "<option value= '' disabled selected>Select User</option>";
     $query_run = mysqli_query($con,$sql);
     while($row = $query_run->fetch_assoc()){
       echo "<option value=".$row['username'].">".$row['name']."</option>";

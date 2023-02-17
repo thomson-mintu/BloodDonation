@@ -14,17 +14,17 @@ $place = mysqli_real_escape_string($con,$_POST['place']);
 $placeid = mysqli_real_escape_string($con,$_POST['placeid']);
 $sql = "INSERT INTO users (username, password,name,age,bgroup,place,phone,email,placeid) VALUES ('".$user."', '".$pw."', '".$name."', '".$age."', '".$bgroup."','".$place."', '".$phone."', '".$email."', '".$placeid."')";
 $query_run = mysqli_query($con,$sql);
-if($query_run){
-  if($_SESSION['isadmin']){
-    header("Location: ./admin.php");
-  }else{
-        session_regenerate_id();
-    	$_SESSION['username'] = $_POST['username'];
-        echo "<script>alert('Login Successful');</script>";
-        header("Location: ./find.php");
-    echo "<script>alert('Success')</script>";
-}
-}
+// if($query_run){
+//   if($_SESSION['isadmin']){
+//     header("Location: ./admin.php");
+//   }else{
+//         session_regenerate_id();
+//     	$_SESSION['username'] = $_POST['username'];
+//         echo "<script>alert('Login Successful');</script>";
+//         header("Location: ./find.php");
+//     echo "<script>alert('Success')</script>";
+// }
+// }
 
 }
 ?>
